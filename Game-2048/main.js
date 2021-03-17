@@ -13,7 +13,7 @@ $(document).ready(function(){
     prepareForMobile();
     newgame();  
 });
-console.log(window.screen.availWidth);
+console.log(localStorage.getItem("localScore") )
 function prepareForMobile(){
     if(documentWidth > 500){
         girdContainerWidth = 500;
@@ -114,6 +114,8 @@ function init(){
     updateBoardView();
     score = 0;
     $("#score").text(0);
+    bestScore = localStorage.getItem("localScore");
+    updateBestScore(bestScore);
 }
 
 function updateBoardView(){
@@ -287,7 +289,8 @@ function moveLeft(){
                             setTimeout("updateScore(score)", 200);
                             if (score > bestScore) {
                                 bestScore = score;
-                                setTimeout("updateBestScore(bestScore)", 200);       
+                                setTimeout("updateBestScore(bestScore)", 200);   
+                                localStorage.setItem("localScore",bestScore)     
                             } 
                             hasConflicted[i][k] = true;
                             continue;
@@ -325,7 +328,8 @@ function moveUp(){
                             setTimeout("updateScore(score)", 200);
                             if (score > bestScore) {
                                 bestScore = score;
-                                setTimeout("updateBestScore(bestScore)", 200);       
+                                setTimeout("updateBestScore(bestScore)", 200); 
+                                localStorage.setItem("localScore",bestScore)       
                             } 
                             hasConflicted[k][j] = true;
                             continue;
@@ -363,7 +367,8 @@ function moveRight(){
                             setTimeout("updateScore(score)", 200);
                             if (score > bestScore) {
                                 bestScore = score;
-                                setTimeout("updateBestScore(bestScore)", 200);        
+                                setTimeout("updateBestScore(bestScore)", 200); 
+                                localStorage.setItem("localScore",bestScore)        
                             } 
                             hasConflicted[i][k] = true;
                             continue;
@@ -401,7 +406,8 @@ function moveDown(){
                             setTimeout("updateScore(score)", 200);
                             if (score > bestScore) {
                                 bestScore = score;
-                                setTimeout("updateBestScore(bestScore)", 200);        
+                                setTimeout("updateBestScore(bestScore)", 200); 
+                                localStorage.setItem("localScore",bestScore)        
                             } 
                             hasConflicted[k][j] = true;
                             continue;
@@ -419,7 +425,8 @@ function isgameOver(board){
     if( nospace( board ) && nomove( board )){
         if (score > bestScore) {
             bestScore = score;
-            setTimeout("updateBestScore(bestScore)", 200);         
+            setTimeout("updateBestScore(bestScore)", 200); 
+            localStorage.setItem("localScore",bestScore)       
         } 
         gameOver();
     }
